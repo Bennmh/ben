@@ -3,270 +3,274 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>SplitDose</title>
+    <title>SplashDose</title>
+    
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="SplashDose">
+    
+    <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2222%22 fill=%22%233b82f6%22/><text y=%22.72em%22 x=%220.1em%22 font-size=%2270%22>💧</text></svg>">
+    
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💧</text></svg>">
+    
+    <link rel="manifest" href="data:application/json,{%22name%22:%22SplashDose%22,%22short_name%22:%22SplashDose%22,%22start_url%22:%22.%22,%22display%22:%22standalone%22,%22background_color%22:%22%23f3f4f6%22,%22theme_color%22:%22%234f46e5%22}">
+    
+    <style>
+        :root {
+            --bg: #f9fafb;
+            --card-bg: #ffffff;
+            --text: #1f2937;
+            --primary: #3b82f6;
+            --primary-light: #dbeafe;
+            --secondary: #e5e7eb;
+            --accent: #f43f5e;
+            --accent-light: #ffe4e6;
+            --radius: 16px;
+        }
 
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="SplashDose">
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
 
-<link rel="manifest" href="data:application/json,{%22name%22:%22SplashDose%22,%22short_name%22:%22SplashDose%22,%22start_url%22:%22.%22,%22display%22:%22standalone%22,%22background_color%22:%22%23f3f4f6%22,%22theme_color%22:%22%234f46e5%22}">
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            padding: 20px;
+            padding-top: calc(20px + env(safe-area-inset-top));
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+        }
 
-<style>
-    :root {
-        --bg: #f9fafb;
-        --card-bg: #ffffff;
-        --text: #1f2937;
-        --primary: #3b82f6;
-        --primary-light: #dbeafe;
-        --secondary: #e5e7eb;
-        --accent: #f43f5e;
-        --accent-light: #ffe4e6;
-        --radius: 16px;
-    }
+        .app-container {
+            width: 100%;
+            max-width: 400px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
 
-    * {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-        -webkit-tap-highlight-color: transparent;
-    }
+        header {
+            text-align: center;
+            margin-bottom: 5px;
+        }
 
-    body {
-        background-color: var(--bg);
-        color: var(--text);
-        padding: 20px;
-        padding-top: calc(20px + env(safe-area-inset-top));
-        display: flex;
-        justify-content: center;
-        align-items: flex-start;
-        min-height: 100vh;
-    }
+        header h1 {
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--primary);
+            letter-spacing: -0.5px;
+        }
 
-    .app-container {
-        width: 100%;
-        max-width: 400px;
-        display: flex;
-        flex-direction: column;
-        gap: 20px;
-    }
+        header p {
+            font-size: 14px;
+            color: #6b7280;
+            margin-top: 4px;
+        }
 
-    header {
-        text-align: center;
-        margin-bottom: 5px;
-    }
+        .card {
+            background: var(--card-bg);
+            border: 3px solid var(--text);
+            border-radius: var(--radius);
+            padding: 20px;
+            box-shadow: 4px 4px 0px var(--text);
+        }
 
-    header h1 {
-        font-size: 28px;
-        font-weight: 800;
-        color: var(--primary);
-        letter-spacing: -0.5px;
-    }
+        .control-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
 
-    header p {
-        font-size: 14px;
-        color: #6b7280;
-        margin-top: 4px;
-    }
+        .label-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 700;
+            font-size: 16px;
+        }
 
-    .card {
-        background: var(--card-bg);
-        border: 3px solid var(--text);
-        border-radius: var(--radius);
-        padding: 20px;
-        box-shadow: 4px 4px 0px var(--text);
-    }
+        .value-badge {
+            background: var(--text);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 14px;
+        }
 
-    .control-group {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-    }
+        .stepper-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            width: 100%;
+        }
 
-    .label-row {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        font-weight: 700;
-        font-size: 16px;
-    }
+        .btn-step {
+            width: 44px;
+            height: 44px;
+            border: 2px solid var(--text);
+            background: var(--card-bg);
+            border-radius: 50%;
+            font-size: 20px;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 2px 2px 0px var(--text);
+        }
 
-    .value-badge {
-        background: var(--text);
-        color: white;
-        padding: 4px 10px;
-        border-radius: 20px;
-        font-size: 14px;
-    }
+        .btn-step:active {
+            transform: translate(1px, 1px);
+            box-shadow: 1px 1px 0px var(--text);
+        }
 
-    .stepper-container {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        width: 100%;
-    }
+        input[type="range"] {
+            flex-grow: 1;
+            -webkit-appearance: none;
+            appearance: none;
+            height: 10px;
+            border-radius: 5px;
+            background: var(--secondary);
+            outline: none;
+            border: 2px solid var(--text);
+        }
 
-    .btn-step {
-        width: 44px;
-        height: 44px;
-        border: 2px solid var(--text);
-        background: var(--card-bg);
-        border-radius: 50%;
-        font-size: 20px;
-        font-weight: 700;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        box-shadow: 2px 2px 0px var(--text);
-    }
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: var(--primary);
+            border: 2px solid var(--text);
+            cursor: pointer;
+        }
 
-    .btn-step:active {
-        transform: translate(1px, 1px);
-        box-shadow: 1px 1px 0px var(--text);
-    }
+        /* Visualizer Box */
+        .visualizer {
+            height: 140px;
+            border: 3px solid var(--text);
+            border-radius: var(--radius);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            background: var(--secondary);
+            box-shadow: 4px 4px 0px var(--text);
+        }
 
-    input[type="range"] {
-        flex-grow: 1;
-        -webkit-appearance: none;
-        appearance: none;
-        height: 10px;
-        border-radius: 5px;
-        background: var(--secondary);
-        outline: none;
-        border: 2px solid var(--text);
-    }
+        .block-leave {
+            background: var(--accent-light);
+            color: var(--accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 13px;
+            transition: height 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            text-align: center;
+            border-bottom: 2px dashed var(--text);
+            overflow: hidden;
+        }
 
-    input[type="range"]::-webkit-slider-thumb {
-        -webkit-appearance: none;
-        appearance: none;
-        width: 24px;
-        height: 24px;
-        border-radius: 50%;
-        background: var(--primary);
-        border: 2px solid var(--text);
-        cursor: pointer;
-    }
+        .block-drink {
+            background: var(--primary-light);
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 16px;
+            flex-grow: 1;
+            transition: height 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            text-align: center;
+            overflow: hidden;
+        }
 
-    /* Visualizer Box */
-    .visualizer {
-        height: 140px;
-        border: 3px solid var(--text);
-        border-radius: var(--radius);
-        overflow: hidden;
-        display: flex;
-        flex-direction: column;
-        background: var(--secondary);
-        box-shadow: 4px 4px 0px var(--text);
-    }
+        /* Result Banner */
+        .result-card {
+            background: #caffbf;
+            border: 3px solid var(--text);
+            border-radius: var(--radius);
+            padding: 18px;
+            text-align: center;
+            box-shadow: 4px 4px 0px var(--text);
+        }
 
-    .block-leave {
-        background: var(--accent-light);
-        color: var(--accent);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-weight: 700;
-        font-size: 13px;
-        transition: height 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        text-align: center;
-        border-bottom: 2px dashed var(--text);
-        overflow: hidden;
-    }
+        .result-instruction {
+            font-size: 14px;
+            text-transform: uppercase;
+            font-weight: 700;
+            letter-spacing: 1px;
+            color: #4b5563;
+            margin-bottom: 6px;
+        }
 
-    .block-drink {
-        background: var(--primary-light);
-        color: var(--primary);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-weight: 800;
-        font-size: 16px;
-        flex-grow: 1;
-        transition: height 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        text-align: center;
-        overflow: hidden;
-    }
-
-    /* Result Banner */
-    .result-card {
-        background: #caffbf;
-        border: 3px solid var(--text);
-        border-radius: var(--radius);
-        padding: 18px;
-        text-align: center;
-        box-shadow: 4px 4px 0px var(--text);
-    }
-
-    .result-instruction {
-        font-size: 14px;
-        text-transform: uppercase;
-        font-weight: 700;
-        letter-spacing: 1px;
-        color: #4b5563;
-        margin-bottom: 6px;
-    }
-
-    .result-main {
-        font-size: 32px;
-        font-weight: 900;
-        color: var(--text);
-    }
-</style>
+        .result-main {
+            font-size: 32px;
+            font-weight: 900;
+            color: var(--text);
+        }
+    </style>
 </head>
 <body>
 
 <div class="app-container">
     <header>
-        <h1>Split Dose 💧</h1>
+        <h1>SplashDose 💧</h1>
         <p>No-math morning potion planner</p>
     </header>
 
-<div class="visualizer">
-    <div id="blockLeave" class="block-leave">Leave 0ml</div>
-    <div id="blockDrink" class="block-drink">Drink 0ml</div>
-</div>
+    <div class="visualizer">
+        <div id="blockLeave" class="block-leave">Leave 0ml</div>
+        <div id="blockDrink" class="block-drink">Drink 0ml</div>
+    </div>
 
-<div class="result-card">
-    <div class="result-instruction">Your Morning Target</div>
-    <div id="finalOutput" class="result-main">Drink -- ml</div>
-</div>
+    <div class="result-card">
+        <div class="result-instruction">Your Morning Target</div>
+        <div id="finalOutput" class="result-main">Drink -- ml</div>
+    </div>
 
-<div class="card control-group">
-    <div class="label-row">
-        <span>Pill Size</span>
-        <span id="pillVal" class="value-badge">70 mg</span>
+    <div class="card control-group">
+        <div class="label-row">
+            <span>Pill Size</span>
+            <span id="pillVal" class="value-badge">70 mg</span>
+        </div>
+        <div class="stepper-container">
+            <button class="btn-step" onclick="adjust('pill', -5)">-</button>
+            <input type="range" id="pillInput" min="10" max="100" step="5" value="70">
+            <button class="btn-step" onclick="adjust('pill', 5)">+</button>
+        </div>
     </div>
-    <div class="stepper-container">
-        <button class="btn-step" onclick="adjust('pill', -5)">-</button>
-        <input type="range" id="pillInput" min="10" max="100" step="5" value="70">
-        <button class="btn-step" onclick="adjust('pill', 5)">+</button>
-    </div>
-</div>
 
-<div class="card control-group">
-    <div class="label-row">
-        <span>Total Water</span>
-        <span id="waterVal" class="value-badge">30 ml</span>
+    <div class="card control-group">
+        <div class="label-row">
+            <span>Total Water</span>
+            <span id="waterVal" class="value-badge">30 ml</span>
+        </div>
+        <div class="stepper-container">
+            <button class="btn-step" onclick="adjust('water', -5)">-</button>
+            <input type="range" id="waterInput" min="10" max="100" step="5" value="30">
+            <button class="btn-step" onclick="adjust('water', 5)">+</button>
+        </div>
     </div>
-    <div class="stepper-container">
-        <button class="btn-step" onclick="adjust('water', -5)">-</button>
-        <input type="range" id="waterInput" min="10" max="100" step="5" value="30">
-        <button class="btn-step" onclick="adjust('water', 5)">+</button>
-    </div>
-</div>
 
-<div class="card control-group">
-    <div class="label-row">
-        <span>Target Dose</span>
-        <span id="targetVal" class="value-badge">45 mg</span>
+    <div class="card control-group">
+        <div class="label-row">
+            <span>Target Dose</span>
+            <span id="targetVal" class="value-badge">45 mg</span>
+        </div>
+        <div class="stepper-container">
+            <button class="btn-step" onclick="adjust('target', -5)">-</button>
+            <input type="range" id="targetInput" min="5" max="100" step="5" value="45">
+            <button class="btn-step" onclick="adjust('target', 5)">+</button>
+        </div>
     </div>
-    <div class="stepper-container">
-        <button class="btn-step" onclick="adjust('target', -5)">-</button>
-        <input type="range" id="targetInput" min="5" max="100" step="5" value="45">
-        <button class="btn-step" onclick="adjust('target', 5)">+</button>
-    </div>
-</div>
 </div>
 
 <script>
@@ -340,7 +344,6 @@
     // Initial run
     calculate();
 </script>
-
 
 </body>
 </html>
